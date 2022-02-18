@@ -15,7 +15,13 @@ class Role(BaseAbstractModel):
     ADJUDICATOR = 2
     PARTICIPANT = 3
 
-    #  TODO: Add role fields
+    ROLE_CHOICES = [
+        (ADMIN, _('Admin')),
+        (ADJUDICATOR, _('Adjudicator')),
+        (PARTICIPANT, _('Participant')),
+    ]
+
+    role_name = md.IntegerField(_('role'), choices=ROLE_CHOICES, default=PARTICIPANT)
 
 
 class Profile(BaseAbstractModel):
@@ -44,7 +50,7 @@ class CustomUser(AbstractBaseUser, PermissionsMixin, BaseAbstractModel):
     is_active = md.BooleanField(_('is active'), default=True)
     uuid = md.UUIDField(default=uuid4(), editable=False, unique=True)
 
-    role = md.ForeignKey(Profile, on_delete=md.CASCADE, default=Role.PARTICIPANT, related_name=_('users'))
+    role = md.ForeignKey(Profile, on_delete=md.CASCADE, related_name=_('users'))
     profile = md.OneToOneField(Profile, on_delete=md.CASCADE, null=True, default=None)
 
     USERNAME_FIELD = 'email'
@@ -53,8 +59,7 @@ class CustomUser(AbstractBaseUser, PermissionsMixin, BaseAbstractModel):
     objects = CustomUserManager()
 
     def get_text_role(self):
-        # TODO: Implement: Get role from db
-        pass
+        return self.role
 
     def __str__(self):
         if self.profile is not None:

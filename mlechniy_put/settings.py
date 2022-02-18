@@ -78,7 +78,7 @@ WSGI_APPLICATION = 'mlechniy_put.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'HOST': '192.168.56.101',
+        'HOST': '10.0.0.1',
         'PORT': '3306',
         'USER': 'mlechniy-put',
         'PASSWORD': 'mlechniy-put',
