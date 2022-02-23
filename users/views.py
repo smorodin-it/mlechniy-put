@@ -2,7 +2,7 @@ from rest_framework import generics as gen, permissions as pm
 
 
 from users.models import CustomUser
-from users.serializers import UserParticipantListSerializer, UserParticipantCreateSerializer, \
+from users.serializers import UserListSerializer, UserParticipantCreateSerializer, \
     UserParticipantUpdateProfileSerializer
 
 
@@ -19,7 +19,7 @@ class ParticipantListView(gen.ListAPIView):
     Only staff can interact with this view
     """
 
-    serializer_class = UserParticipantListSerializer
+    serializer_class = UserListSerializer
 
     def get_queryset(self):
         return CustomUser.objects.filter(user_type=CustomUser.PARTICIPANT)

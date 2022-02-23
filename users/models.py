@@ -16,7 +16,7 @@ class UserProfile(BaseAbstractModel):
     patronymic = md.CharField(_('patronymic name'), max_length=DbFieldsLength.CHAR_FIELD, null=True)
     phone = md.CharField(_('phone number'), max_length=11)
     age = md.IntegerField(_('age'))
-    post_address_author = md.CharField(_('author\'s post address'), max_length=DbFieldsLength.CHAR_FIELD)
+    post_address_author = md.CharField(_('author\'s post address'), max_length=DbFieldsLength.CHAR_FIELD, null=True)
     edu_organization_name = md.CharField(_('educational organization name'),
                                          max_length=DbFieldsLength.CHAR_FIELD, null=True)
     edu_organization_address = md.CharField(_('educational organization address'),

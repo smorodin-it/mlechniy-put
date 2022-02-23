@@ -15,7 +15,7 @@ class UserFullProfileSerializer(sr.ModelSerializer):
         fields = ['__all__']
 
 
-class UserParticipantListSerializer(sr.ModelSerializer):
+class UserListSerializer(sr.ModelSerializer):
     profile = UserProfileSerializer(read_only=True)
 
     class Meta:
