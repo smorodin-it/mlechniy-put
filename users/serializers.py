@@ -42,3 +42,11 @@ class UserParticipantUpdateProfileSerializer(sr.ModelSerializer):
     class Meta:
         model = CustomUser
         fields = ['profile']
+
+
+class UserAdjudicatorCreateSerializer(sr.ModelSerializer):
+    profile = UserProfileSerializer()
+
+    class Meta:
+        model = CustomUser
+        fields = ['email', 'password', 'profile']

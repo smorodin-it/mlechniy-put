@@ -3,7 +3,7 @@ from rest_framework import generics as gen, permissions as pm
 
 from users.models import CustomUser
 from users.serializers import UserListSerializer, UserParticipantCreateSerializer, \
-    UserParticipantUpdateProfileSerializer
+    UserParticipantUpdateProfileSerializer, UserAdjudicatorCreateSerializer
 
 
 class UserUpdateDestroyView(gen.UpdateAPIView, gen.DestroyAPIView):
@@ -38,5 +38,23 @@ class ParticipantInActiveContestListView(gen.ListAPIView):
 
 
 class ParticipantCreateView(gen.CreateAPIView):
+    """
+    TODO: implement file check and upload here
+    """
     queryset = CustomUser.objects.all()
     serializer_class = UserParticipantCreateSerializer
+
+
+class AdjudicatorCreateView(gen.CreateAPIView):
+    """
+    can create by anonymous user
+    """
+    queryset = CustomUser.objects.all()
+    serializer_class = UserAdjudicatorCreateSerializer
+
+
+class AdjudicatorListView(gen.ListAPIView):
+    serializer_class = UserListSerializer
+
+    def get_queryset(self):
+        return CustomUser.objects.filter(user_type=CustomUser.ADJUDICATOR)
