@@ -11,6 +11,11 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 
 from pathlib import Path
+from dotenv import load_dotenv
+import os
+
+# Load env variables
+load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -20,7 +25,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-xqyi5a6ffe2q#4i13*%nvkvr0^cu7jhcr8vg=bmyz&-ncy9ca4'
+SECRET_KEY = os.environ.get("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -77,12 +82,11 @@ WSGI_APPLICATION = 'mlechniy_put.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'HOST': '10.0.0.1',
-        'PORT': '3306',
-        'USER': 'mlechniy-put',
-        'PASSWORD': 'mlechniy-put',
-        'NAME': 'mlechniy-put',
+        'HOST': str(os.environ.get("HOST")),
+        'PORT': str(os.environ.get("PORT")),
+        'USER': str(os.environ.get("USER")),
+        'PASSWORD': str(os.environ.get("PASSWORD")),
+        'NAME': str(os.environ.get("NAME")),
     }
 }
 
