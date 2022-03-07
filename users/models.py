@@ -10,7 +10,10 @@ from mlechniy_put.models import BaseAbstractModel
 from users.managers import CustomUserManager
 
 
-class UserProfile(BaseAbstractModel):
+class UserProfile(
+    BaseAbstractModel,
+    PermissionsMixin,
+):
     first_name = md.CharField(_("first name"), max_length=DbFieldsLength.CHAR_FIELD)
     last_name = md.CharField(_("last name"), max_length=DbFieldsLength.CHAR_FIELD)
     patronymic = md.CharField(
