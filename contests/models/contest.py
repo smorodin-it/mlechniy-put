@@ -1,4 +1,3 @@
-from django.core.validators import MinValueValidator, MaxValueValidator
 from django.db import models as md
 from django.contrib.auth.models import PermissionsMixin
 from django.utils.translation import gettext_lazy as _
@@ -21,23 +20,4 @@ class Contest(BaseAbstractModel, PermissionsMixin):
     )
     participants = md.ManyToManyField(
         CustomUser, related_name="participant_in_contests"
-    )
-
-
-class ContestRate(BaseAbstractModel, PermissionsMixin):
-    rate = md.IntegerField(
-        _("participant rate"),
-        validators=[
-            MinValueValidator(1, _("Value can't be less than 1")),
-            MaxValueValidator(10, _("Value can't be bigger than 10")),
-        ],
-    )
-    adjudicator = md.OneToOneField(CustomUser, on_delete=md.CASCADE)
-
-
-class Story(BaseAbstractModel, PermissionsMixin):
-    title = md.CharField(_("story title"), max_length=DbFieldsLength.CHAR_FIELD)
-    author = md.ForeignKey(CustomUser, related_name=_("stories"), on_delete=md.CASCADE)
-    rate = md.ForeignKey(
-        ContestRate, related_name=_("adjudicator rate"), on_delete=md.CASCADE
     )
