@@ -1,15 +1,18 @@
-from rest_framework import generics as gen, permissions as pm
-
+from rest_framework import generics as gen
 
 from users.models import CustomUser
-from users.serializers import UserListSerializer, UserParticipantCreateSerializer, \
-    UserParticipantUpdateProfileSerializer, UserAdjudicatorCreateSerializer
+from users.serializers import (
+    UserListSerializer,
+    UserParticipantUpdateProfileSerializer,
+)
+from users.utils import create_user
 
 
 class UserUpdateDestroyView(gen.UpdateAPIView, gen.DestroyAPIView):
     """
     Only admin can interact with this view
     """
+
     queryset = CustomUser.objects.all()
     serializer_class = UserParticipantUpdateProfileSerializer
 
@@ -34,6 +37,7 @@ class ParticipantInActiveContestListView(gen.ListAPIView):
     - Жюри;
     - Участники конкурса?
     """
+
     pass
 
 
@@ -41,16 +45,22 @@ class ParticipantCreateView(gen.CreateAPIView):
     """
     TODO: implement file check and upload here
     """
+
     queryset = CustomUser.objects.all()
-    serializer_class = UserParticipantCreateSerializer
+
+    def post(self, request, *args, **kwargs):
+        return create_user(request, CustomUser.PARTICIPANT, *args, **kwargs)
 
 
 class AdjudicatorCreateView(gen.CreateAPIView):
     """
     can create by anonymous user
     """
+
     queryset = CustomUser.objects.all()
-    serializer_class = UserAdjudicatorCreateSerializer
+
+    def post(self, request, *args, **kwargs):
+        return create_user(request, CustomUser.ADJUDICATOR, *args, **kwargs)
 
 
 class AdjudicatorListView(gen.ListAPIView):

@@ -6,13 +6,19 @@ from users.models import CustomUser, UserProfile
 class UserProfileSerializer(sr.ModelSerializer):
     class Meta:
         model = UserProfile
-        fields = ['first_name', 'last_name', 'patronymic']
+        fields = ["first_name", "last_name", "patronymic"]
 
 
 class UserFullProfileSerializer(sr.ModelSerializer):
     class Meta:
         model = UserProfile
-        fields = ['__all__']
+        exclude = "__all__"
+
+
+class UserCreateUpdateProfileSerializer(sr.ModelSerializer):
+    class Meta:
+        model = UserProfile
+        exclude = ["id", "created_at", "updated_at"]
 
 
 class UserListSerializer(sr.ModelSerializer):
@@ -20,7 +26,7 @@ class UserListSerializer(sr.ModelSerializer):
 
     class Meta:
         model = CustomUser
-        fields = ['uuid', 'profile']
+        fields = ["uuid", "profile"]
 
 
 class UserParticipantCreateSerializer(sr.ModelSerializer):
@@ -29,19 +35,19 @@ class UserParticipantCreateSerializer(sr.ModelSerializer):
     TODO: Need implement confirm password field and check it!
     """
 
-    profile = UserFullProfileSerializer()
+    profile = UserCreateUpdateProfileSerializer()
 
     class Meta:
         model = CustomUser
-        fields = ['email', 'password', 'profile']
+        fields = ["email", "password", "profile"]
 
 
 class UserParticipantUpdateProfileSerializer(sr.ModelSerializer):
-    profile = UserFullProfileSerializer()
+    profile = UserCreateUpdateProfileSerializer()
 
     class Meta:
         model = CustomUser
-        fields = ['profile']
+        fields = ["profile"]
 
 
 class UserAdjudicatorCreateSerializer(sr.ModelSerializer):
@@ -49,4 +55,4 @@ class UserAdjudicatorCreateSerializer(sr.ModelSerializer):
 
     class Meta:
         model = CustomUser
-        fields = ['email', 'password', 'profile']
+        fields = ["email", "password", "profile"]
