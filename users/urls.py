@@ -6,18 +6,20 @@ from users.views import (
     AdjudicatorCreateView,
     ParticipantListView,
     ParticipantInActiveContestListView,
+    UserRetrieveView,
 )
 
 urlpatterns = [
     # Participants
-    path("participant-create/", ParticipantCreateView.as_view()),
-    path("participant-list/", ParticipantListView.as_view()),
-    path(
-        "participant-active-contest-list/", ParticipantInActiveContestListView.as_view()
-    ),
+    path("participant/", ParticipantCreateView.as_view()),
+    path("participant/", ParticipantListView.as_view()),
+    # TODO: enable after implementation
+    # path(
+    #     "participant/active-contest-list/", ParticipantInActiveContestListView.as_view()
+    # ),
     # Adjudicators
     path("adjudicator-create/", AdjudicatorCreateView.as_view()),
     path("adjudicator-list/", AdjudicatorListView.as_view()),
     # Users
-    path("adjudicator-create/", ParticipantCreateView.as_view()),
+    path("<str:uuid>/", UserRetrieveView.as_view()),
 ]

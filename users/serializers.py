@@ -12,7 +12,7 @@ class UserProfileSerializer(sr.ModelSerializer):
 class UserFullProfileSerializer(sr.ModelSerializer):
     class Meta:
         model = UserProfile
-        exclude = "__all__"
+        exclude = ["id"]
 
 
 class UserCreateUpdateProfileSerializer(sr.ModelSerializer):
@@ -56,3 +56,11 @@ class UserAdjudicatorCreateSerializer(sr.ModelSerializer):
     class Meta:
         model = CustomUser
         fields = ["email", "password", "profile"]
+
+
+class UserRetrieveSerializer(sr.ModelSerializer):
+    profile = UserFullProfileSerializer(read_only=True)
+
+    class Meta:
+        model = CustomUser
+        fields = ["email", "uuid", "profile"]

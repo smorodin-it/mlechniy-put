@@ -4,6 +4,7 @@ from users.models import CustomUser
 from users.serializers import (
     UserListSerializer,
     UserParticipantUpdateProfileSerializer,
+    UserRetrieveSerializer,
 )
 from users.utils import create_user
 
@@ -68,3 +69,10 @@ class AdjudicatorListView(gen.ListAPIView):
 
     def get_queryset(self):
         return CustomUser.objects.filter(user_type=CustomUser.ADJUDICATOR)
+
+
+class UserRetrieveView(gen.RetrieveAPIView):
+    # TODO: Set special permissions to only see self data (or get user by uuid from )
+    queryset = CustomUser.objects.all()
+    serializer_class = UserRetrieveSerializer
+    lookup_field = "uuid"

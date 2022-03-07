@@ -21,4 +21,5 @@ class CustomUserAdmin(admin.ModelAdmin):
 
 
 admin.site.register(CustomUser, CustomUserAdmin)
+# TODO: Implement custom profile admin model with user readonly field
 admin.site.register(UserProfile)
