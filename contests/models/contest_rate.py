@@ -1,13 +1,16 @@
-from django.contrib.auth.models import PermissionsMixin
+from uuid import uuid4
+
 from django.core.validators import MinValueValidator, MaxValueValidator
 from django.db import models as md
 from django.utils.translation import gettext_lazy as _
 
 
 from mlechniy_put.models import BaseAbstractModel
+from users.models import CustomUser
 
 
-class ContestRate(BaseAbstractModel, PermissionsMixin):
+class ContestRate(BaseAbstractModel):
+    uuid = md.UUIDField(default=uuid4, editable=False, unique=True)
     rate = md.IntegerField(
         _("participant rate"),
         validators=[

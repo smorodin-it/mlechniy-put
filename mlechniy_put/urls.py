@@ -17,6 +17,7 @@ from django.contrib import admin
 from django.urls import path, include
 
 from users import urls as users_urls
+from contests import urls as contests_urls
 
 urlpatterns = [
     # Admin site
@@ -27,7 +28,9 @@ urlpatterns = [
         include(
             [
                 # Users
-                path("user/", include(users_urls))
+                path("user/", include(users_urls)),
+                # Contest
+                path("contest/", include(contests_urls)),
             ]
         ),
     ),

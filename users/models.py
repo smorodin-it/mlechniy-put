@@ -1,8 +1,8 @@
 from uuid import uuid4
 
+from django.contrib.auth.models import PermissionsMixin
 from django.db import models as md
 from django.contrib.auth.base_user import AbstractBaseUser
-from django.contrib.auth.models import PermissionsMixin
 from django.utils.translation import gettext_lazy as _
 
 from mlechniy_put.constants import DbFieldsLength
@@ -12,7 +12,6 @@ from users.managers import CustomUserManager
 
 class UserProfile(
     BaseAbstractModel,
-    PermissionsMixin,
 ):
     first_name = md.CharField(_("first name"), max_length=DbFieldsLength.CHAR_FIELD)
     last_name = md.CharField(_("last name"), max_length=DbFieldsLength.CHAR_FIELD)
@@ -92,7 +91,7 @@ class CustomUser(AbstractBaseUser, PermissionsMixin, BaseAbstractModel):
 
     uuid = md.UUIDField(default=uuid4, editable=False, unique=True)
 
-    profile = md.OneToOneField(UserProfile, on_delete=md.CASCADE)
+    profile = md.OneToOneField(UserProfile, on_delete=md.CASCADE, null=True)
 
     USERNAME_FIELD = "email"
     REQUIRED_FIELDS = []

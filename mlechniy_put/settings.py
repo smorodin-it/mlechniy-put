@@ -160,5 +160,3 @@ SIMPLE_JWT = {
     "USER_ID_FIELD": "uuid",
     "USER_ID_CLAIM": "user_uuid",
 }
-
-APPEND_SLASH = True
