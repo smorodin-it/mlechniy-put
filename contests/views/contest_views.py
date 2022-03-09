@@ -13,7 +13,6 @@ from contests.serializers.contest_serializer import (
 class ContestListView(gen.ListAPIView):
     queryset = Contest.objects.all()
     serializer_class = ContestListSerializer
-    renderer_classes = JSONRenderer
 
 
 class ContestCreateView(gen.CreateAPIView):
