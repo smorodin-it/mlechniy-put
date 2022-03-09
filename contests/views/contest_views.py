@@ -1,4 +1,5 @@
 from rest_framework import generics as gen
+from rest_framework.renderers import JSONRenderer
 
 from contests.models.contest import Contest
 from contests.serializers.contest_serializer import (
@@ -12,6 +13,7 @@ from contests.serializers.contest_serializer import (
 class ContestListView(gen.ListAPIView):
     queryset = Contest.objects.all()
     serializer_class = ContestListSerializer
+    renderer_classes = JSONRenderer
 
 
 class ContestCreateView(gen.CreateAPIView):
