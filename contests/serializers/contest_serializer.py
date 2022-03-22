@@ -1,6 +1,6 @@
 from rest_framework import serializers as sr
 
-from contests.models.contest import Contest
+from contests.models.contests import Contest
 
 
 class ContestListSerializer(sr.ModelSerializer):

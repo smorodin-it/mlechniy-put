@@ -4,7 +4,6 @@ from django.core.validators import MinValueValidator, MaxValueValidator
 from django.db import models as md
 from django.utils.translation import gettext_lazy as _
 
-
 from mlechniy_put.models import BaseAbstractModel
 from users.models import CustomUser
 
@@ -19,3 +18,4 @@ class ContestRate(BaseAbstractModel):
         ],
     )
     adjudicator = md.OneToOneField(CustomUser, on_delete=md.CASCADE)
+    story = md.OneToOneField("Story", on_delete=md.CASCADE)

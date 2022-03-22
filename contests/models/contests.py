@@ -26,6 +26,7 @@ class Contest(BaseAbstractModel):
     participants = md.ManyToManyField(
         CustomUser, related_name="participant_in_contests"
     )
+    stories = md.ForeignKey("Story", on_delete=md.CASCADE, related_name="contest")
 
     def __str__(self):
         return f"{self.title} - {self.start_date} - {self.end_date}"
