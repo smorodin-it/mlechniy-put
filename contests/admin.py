@@ -42,6 +42,7 @@ class StoryAdmin(admin.ModelAdmin):
 
 class ContestRateAdmin(admin.ModelAdmin):
     model = ContestRate
+    readonly_fields = ("uuid",)
     list_display = ("story", "rate", "get_adjudicator")
 
     @display(ordering="adjudicator__profile__first_name", description=_("adjudicator"))
