@@ -17,5 +17,8 @@ class ContestRate(BaseAbstractModel):
             MaxValueValidator(10, _("Value can't be bigger than 10")),
         ],
     )
-    adjudicator = md.OneToOneField(CustomUser, on_delete=md.CASCADE)
-    story = md.OneToOneField("Story", on_delete=md.CASCADE)
+    adjudicator = md.OneToOneField(CustomUser, on_delete=md.CASCADE, null=True)
+    story = md.OneToOneField("Story", on_delete=md.CASCADE, null=True)
+
+    def __str__(self):
+        return f"{self.story.author.profile.get_short_name()} - {self.story.title}"

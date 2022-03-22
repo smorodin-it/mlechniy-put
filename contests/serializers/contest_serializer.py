@@ -1,6 +1,7 @@
 from rest_framework import serializers as sr
 
 from contests.models.contests import Contest
+from users.serializers import UserProfileSerializer
 
 
 class ContestListSerializer(sr.ModelSerializer):
@@ -10,6 +11,9 @@ class ContestListSerializer(sr.ModelSerializer):
 
 
 class ContestFullSerializer(sr.ModelSerializer):
+    adjudicators = UserProfileSerializer(read_only=True, many=True)
+    participants = UserProfileSerializer(read_only=True, many=True)
+
     class Meta:
         model = Contest
         exclude = ["id"]

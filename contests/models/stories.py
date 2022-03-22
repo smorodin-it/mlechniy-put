@@ -12,3 +12,12 @@ class Story(BaseAbstractModel):
     uuid = md.UUIDField(default=uuid4, editable=False, unique=True)
     title = md.CharField(_("story title"), max_length=DbFieldsLength.CHAR_FIELD)
     author = md.ForeignKey(CustomUser, related_name="stories", on_delete=md.CASCADE)
+    contest = md.ForeignKey(
+        "Contest",
+        on_delete=md.CASCADE,
+        related_name="stories",
+        null=True,
+    )
+
+    def __str__(self):
+        return f"{self.author.profile.get_short_name()} - {self.title}"

@@ -11,8 +11,8 @@ from users.views import (
 
 urlpatterns = [
     # Participants
-    path("participant/", ParticipantCreateView.as_view()),
-    path("participant/", ParticipantListView.as_view()),
+    path("participant-create/", ParticipantCreateView.as_view()),
+    path("participant-list/", ParticipantListView.as_view()),
     # TODO: enable after implementation
     # path(
     #     "participant/active-contest-list/", ParticipantInActiveContestListView.as_view()

@@ -1,5 +1,4 @@
 from rest_framework import generics as gen
-from rest_framework.renderers import JSONRenderer
 
 from contests.models.contests import Contest
 from contests.serializers.contest_serializer import (
