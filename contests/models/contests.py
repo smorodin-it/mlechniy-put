@@ -1,6 +1,7 @@
 from uuid import uuid4
 
 from django.db import models as md
+from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 
 from mlechniy_put.constants import DbFieldsLength
@@ -30,9 +31,11 @@ class Contest(BaseAbstractModel):
     def __str__(self):
         return f"{self.title} - {self.start_date} - {self.end_date}"
 
+    @property
     def is_active(self) -> bool:
         """
         Check if current contest can get participant stories
         :return:
         """
-        pass
+        now = timezone.now()
+        return self.start_date < now < self.end_date

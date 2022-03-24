@@ -17,6 +17,7 @@ class ContestListView(gen.ListAPIView):
 class ContestCreateView(gen.CreateAPIView):
     queryset = Contest.objects.all()
     serializer_class = ContestCreateUpdateSerializer
+    # TODO: Add all active adjudicators to new contest by default
 
 
 class ContestUpdateDestroyView(gen.UpdateAPIView, gen.DestroyAPIView):

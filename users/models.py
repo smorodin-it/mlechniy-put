@@ -21,11 +21,11 @@ class UserProfile(
         null=True,
         blank=True,
     )
-    phone = md.CharField(_("phone number"), max_length=11)
+    phone = md.CharField(_("phone number"), max_length=DbFieldsLength.PHONE_LENGTH)
     age = md.IntegerField(_("age"))
-    post_address_author = md.CharField(
+    post_address_author = md.TextField(
         _("author's post address"),
-        max_length=DbFieldsLength.CHAR_FIELD,
+        max_length=DbFieldsLength.TEXT_FIELD,
         null=True,
         blank=True,
     )
@@ -35,9 +35,9 @@ class UserProfile(
         null=True,
         blank=True,
     )
-    edu_organization_address = md.CharField(
+    edu_organization_address = md.TextField(
         _("educational organization address"),
-        max_length=DbFieldsLength.CHAR_FIELD,
+        max_length=DbFieldsLength.TEXT_FIELD,
         null=True,
         blank=True,
     )
@@ -84,6 +84,7 @@ class CustomUser(AbstractBaseUser, PermissionsMixin, BaseAbstractModel):
     email = md.EmailField(_("email address"), unique=True)
     password = md.CharField(_("password"), max_length=88)
     is_staff = md.BooleanField(_("is staff"), default=False)
+    # TODO: Implement activation by email
     is_active = md.BooleanField(_("is active"), default=True)
     user_type = md.IntegerField(
         _("user type"), choices=ROLE_CHOICES, default=PARTICIPANT

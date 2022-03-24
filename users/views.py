@@ -1,12 +1,16 @@
+from djangorestframework_camel_case.parser import CamelCaseMultiPartParser
 from rest_framework import generics as gen
 
+from mlechniy_put.utils.create_user import (
+    create_adjudicator_user,
+    create_participant_user,
+)
 from users.models import CustomUser
 from users.serializers import (
     UserListSerializer,
     UserParticipantUpdateProfileSerializer,
     UserRetrieveSerializer,
 )
-from users.utils import create_user
 
 
 class UserUpdateDestroyView(gen.UpdateAPIView, gen.DestroyAPIView):
@@ -43,14 +47,11 @@ class ParticipantInActiveContestListView(gen.ListAPIView):
 
 
 class ParticipantCreateView(gen.CreateAPIView):
-    """
-    TODO: implement file check and upload here
-    """
-
     queryset = CustomUser.objects.all()
+    parser_classes = [CamelCaseMultiPartParser]
 
     def post(self, request, *args, **kwargs):
-        return create_user(request, CustomUser.PARTICIPANT, *args, **kwargs)
+        return create_participant_user(request, CustomUser.PARTICIPANT, *args, **kwargs)
 
 
 class AdjudicatorCreateView(gen.CreateAPIView):
@@ -61,7 +62,7 @@ class AdjudicatorCreateView(gen.CreateAPIView):
     queryset = CustomUser.objects.all()
 
     def post(self, request, *args, **kwargs):
-        return create_user(request, CustomUser.ADJUDICATOR, *args, **kwargs)
+        return create_adjudicator_user(request, CustomUser.ADJUDICATOR, *args, **kwargs)
 
 
 class AdjudicatorListView(gen.ListAPIView):
