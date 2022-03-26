@@ -7,7 +7,7 @@ from contests.views.contest_views import (
     ContestRetrieveView,
     ContestTogglePublish,
 )
-from contests.views.story_view import StoryListView
+from contests.views.story_view import StoryListView, StoryRetrieveView
 
 contest_urlpatterns = [
     # Base CRUD
@@ -23,6 +23,7 @@ contest_urlpatterns = [
 story_urlpatterns = [
     # Base CRUD
     path("list/", StoryListView.as_view()),
+    path("retrieve/<str:uuid>", StoryRetrieveView.as_view()),
     # path("create/", ContestCreateView.as_view()),
     # path("retrieve/<str:uuid>/", ContestRetrieveView.as_view()),
     # path("update/<str:uuid>/", ContestUpdateDestroyView.as_view()),
