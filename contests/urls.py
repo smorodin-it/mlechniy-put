@@ -7,8 +7,9 @@ from contests.views.contest_views import (
     ContestRetrieveView,
     ContestTogglePublish,
 )
+from contests.views.story_view import StoryListView
 
-urlpatterns = [
+contest_urlpatterns = [
     # Base CRUD
     path("list/", ContestListView.as_view()),
     path("create/", ContestCreateView.as_view()),
@@ -17,4 +18,15 @@ urlpatterns = [
     path("delete/<str:uuid>/", ContestUpdateDestroyView.as_view()),
     # Toggle publish
     path("toggle-publish/<str:uuid>/", ContestTogglePublish.as_view()),
+]
+
+story_urlpatterns = [
+    # Base CRUD
+    path("list/", StoryListView.as_view()),
+    # path("create/", ContestCreateView.as_view()),
+    # path("retrieve/<str:uuid>/", ContestRetrieveView.as_view()),
+    # path("update/<str:uuid>/", ContestUpdateDestroyView.as_view()),
+    # path("delete/<str:uuid>/", ContestUpdateDestroyView.as_view()),
+    # Toggle publish
+    # path("toggle-publish/<str:uuid>/", ContestTogglePublish.as_view()),
 ]
