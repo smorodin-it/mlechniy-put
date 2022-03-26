@@ -16,10 +16,10 @@ def create_adjudicator_user(request):
         profile_data = user_serializer.validated_data.pop("profile")
         profile = UserProfile(**profile_data)
         profile.save()
-        participant = CustomUser(**user_serializer.validated_data, profile=profile)
-        participant.user_type = CustomUser.ADJUDICATOR
-        participant.save()
-        return response_create(participant)
+        adjudicator = CustomUser(**user_serializer.validated_data, profile=profile)
+        adjudicator.user_type = CustomUser.ADJUDICATOR
+        adjudicator.save()
+        return response_create(adjudicator)
     return response_error(user_serializer.errors, 400)
 
 
