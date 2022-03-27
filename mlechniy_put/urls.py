@@ -22,6 +22,8 @@ from contests.urls import contest_urlpatterns, story_urlpatterns
 urlpatterns = [
     # Admin site
     path("admin/", admin.site.urls),
+    # Participant site
+    # Adjudicator site
     # API
     path(
         "api/v1/",
