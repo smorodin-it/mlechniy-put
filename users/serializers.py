@@ -29,9 +29,8 @@ class UserListSerializer(sr.ModelSerializer):
         fields = ["uuid", "profile"]
 
 
-class UserParticipantCreateSerializer(sr.ModelSerializer):
+class UserAdjudicatorCreateSerializer(sr.ModelSerializer):
     """
-    TODO: Need re-implement with form and file upload \n
     TODO: Need implement confirm password field and check it!
     """
 
@@ -48,14 +47,6 @@ class UserParticipantUpdateProfileSerializer(sr.ModelSerializer):
     class Meta:
         model = CustomUser
         fields = ["profile"]
-
-
-class UserAdjudicatorCreateSerializer(sr.ModelSerializer):
-    profile = UserProfileSerializer()
-
-    class Meta:
-        model = CustomUser
-        fields = ["email", "password", "profile"]
 
 
 class UserRetrieveSerializer(sr.ModelSerializer):

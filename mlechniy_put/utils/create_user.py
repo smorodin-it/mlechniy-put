@@ -7,11 +7,11 @@ from contests.models import Story, Contest
 from mlechniy_put.utils.response_types import response_create, response_error
 from users.forms import UserCreateForm
 from users.models import UserProfile, CustomUser
-from users.serializers import UserParticipantCreateSerializer
+from users.serializers import UserAdjudicatorCreateSerializer
 
 
 def create_adjudicator_user(request):
-    user_serializer = UserParticipantCreateSerializer(data=request.data)
+    user_serializer = UserAdjudicatorCreateSerializer(data=request.data)
     if user_serializer.is_valid():
         profile_data = user_serializer.validated_data.pop("profile")
         profile = UserProfile(**profile_data)
@@ -23,7 +23,7 @@ def create_adjudicator_user(request):
     return response_error(user_serializer.errors, 400)
 
 
-def create_participant_user(request: HttpRequest, user_type, *args, **kwargs):
+def create_participant_user(request: HttpRequest):
     # Get active contest OR return error if no active contest
     now = timezone.now()
     active_published_contest = Contest.objects.filter(

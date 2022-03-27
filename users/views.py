@@ -51,7 +51,7 @@ class ParticipantCreateView(gen.CreateAPIView):
     parser_classes = [CamelCaseMultiPartParser]
 
     def post(self, request, *args, **kwargs):
-        return create_participant_user(request, CustomUser.PARTICIPANT, *args, **kwargs)
+        return create_participant_user(request)
 
 
 class AdjudicatorCreateView(gen.CreateAPIView):
@@ -62,7 +62,7 @@ class AdjudicatorCreateView(gen.CreateAPIView):
     queryset = CustomUser.objects.all()
 
     def post(self, request, *args, **kwargs):
-        return create_adjudicator_user(request, CustomUser.ADJUDICATOR, *args, **kwargs)
+        return create_adjudicator_user(request)
 
 
 class AdjudicatorListView(gen.ListAPIView):
