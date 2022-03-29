@@ -16,6 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
+from frontend import views as frontend_views
 from users import urls as users_urls
 from contests.urls import contest_urlpatterns, story_urlpatterns
 
@@ -23,6 +24,7 @@ urlpatterns = [
     # Admin site
     path("admin/", admin.site.urls),
     # Participant site
+    path("", frontend_views.participant_view, name="index"),
     # Adjudicator site
     # API
     path(

@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     "rest_framework",
     "users",
     "contests",
+    "frontend",
 ]
 
 MIDDLEWARE = [
@@ -126,7 +127,7 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
-STATIC_ROOT = BASE_DIR / "/frontend/templates/build/static"
+STATIC_ROOT = BASE_DIR / "/frontend/templates/dist/apps/participant"
 STATIC_URL = "/static/"
 
 # Media upload settings
