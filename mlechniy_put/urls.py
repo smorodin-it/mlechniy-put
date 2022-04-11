@@ -15,6 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 
 from frontend import views as frontend_views
 from users import urls as users_urls
@@ -31,6 +32,9 @@ urlpatterns = [
         "api/v1/",
         include(
             [
+                # Auth
+                path("auth/token/", TokenObtainPairView.as_view(), name='token_obtain_pair'),
+                path("auth/refresh/", TokenRefreshView.as_view(), name='token_refresh'),
                 # Users
                 path("user/", include(users_urls)),
                 # Contest
