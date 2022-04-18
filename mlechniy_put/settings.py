@@ -168,5 +168,4 @@ SIMPLE_JWT = {
     "USER_ID_CLAIM": "user_uuid",
     "ROTATE_REFRESH_TOKENS": True,
     "BLACKLIST_AFTER_ROTATION": True,
-
 }

@@ -1,5 +1,6 @@
 from djangorestframework_camel_case.parser import CamelCaseMultiPartParser
 from rest_framework import generics as gen
+from rest_framework_simplejwt.views import TokenObtainPairView
 
 from mlechniy_put.utils.create_user import (
     create_adjudicator_user,
@@ -9,7 +10,7 @@ from users.models import CustomUser
 from users.serializers import (
     UserListSerializer,
     UserParticipantUpdateProfileSerializer,
-    UserRetrieveSerializer,
+    UserRetrieveSerializer, CustomTokenObtainSerializer,
 )
 
 
@@ -77,3 +78,7 @@ class UserRetrieveView(gen.RetrieveAPIView):
     queryset = CustomUser.objects.all()
     serializer_class = UserRetrieveSerializer
     lookup_field = "uuid"
+
+
+class CustomTokenObtainPairView(TokenObtainPairView):
+    serializer_class = CustomTokenObtainSerializer

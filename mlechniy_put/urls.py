@@ -20,6 +20,7 @@ from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 from frontend import views as frontend_views
 from users import urls as users_urls
 from contests.urls import contest_urlpatterns, story_urlpatterns
+from users.views import CustomTokenObtainPairView
 
 urlpatterns = [
     # Admin site
@@ -33,7 +34,7 @@ urlpatterns = [
         include(
             [
                 # Auth
-                path("auth/token/", TokenObtainPairView.as_view(), name='token_obtain_pair'),
+                path("auth/token/", CustomTokenObtainPairView.as_view(), name='token_obtain_pair'),
                 path("auth/refresh/", TokenRefreshView.as_view(), name='token_refresh'),
                 # Users
                 path("user/", include(users_urls)),
